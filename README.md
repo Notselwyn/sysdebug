@@ -6,9 +6,25 @@ Sysdebug was written as a quick and dirty tool to execute syscalls on the run fo
 
 You can use `sysdebug` to execute Linux system calls with up to 7 arguments at once.
 
+`sys_open` (2) to open the /etc/passwd file, and it returns the new file descriptor:
+
+```bash
+$ ./sysdebug 2 "/etc/passwd" "" ""
+0x3
+```
+
+`sys_open` (2) to open the /etc/shadow file, and it returns the error:
+
+```bash
+$ ./sysdebug 2 "/etc/shadow" "" ""
+0xffffffffffffffff
+```
+
+`sys_execve` (59) to execute `whoami`:
+
 ```bash
 $ ./sysdebug 59 "/bin/whoami" "" ""
-user
+dev
 ```
 
 ## Compiling
