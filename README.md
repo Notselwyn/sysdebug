@@ -29,4 +29,4 @@ dev
 
 ## Compiling
 
-Sysdebug can be compiled using simply `gcc main.c -o sysdebug`. Alternatively you can build a static binary using `gcc main.c -o sysdebug -static` - but we recommend `musl-gcc main.c -o sysdebug -static` for 95% size decrease. 
+Sysdebug can be compiled using simply `gcc main.c -o sysdebug`. Alternatively you can build a static binary using `gcc main.c -o sysdebug -static`. We recommend `musl-gcc main.c -o sysdebug -static` for 95% size decrease. 
