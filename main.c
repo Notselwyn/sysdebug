@@ -23,14 +23,11 @@ int main(int argc, char** argv)
         char is_int = 1;
 
         // check if the entire string contains non-int chars
-        for (int j=0; argv[i][j] != '\x00'; j++) {
-            char chr = argv[i][j];
-            if (!(chr >= 48 && chr <= 57))
-            {
+        int j=0;
+        char chr = argv[i][j];
+        for (; chr != '\x00'; j++, chr = argv[i][j])
+            if (chr < 48 || chr > 57)
                 is_int = 0;
-                break;
-            }
-        }
 
         if (is_int == 1)
             argv[i] = convi;
@@ -45,7 +42,7 @@ int main(int argc, char** argv)
         puts("");
     }
 
-    // miracously this does not raise any errors and syscalls gracefully accept invalid rest arguments
+    // miraculously this does not raise any errors and syscalls gracefully accept invalid rest arguments
     unsigned long result = syscall(argv[1], argv[2], argv[3], argv[4], argv[5], argv[6], argv[7], argv[8]);
     printf("0x%lx\n", result);
     return 0;
