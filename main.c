@@ -13,22 +13,24 @@ int main(int argc, char** argv)
 
     // parse arguments
     for (int i=1; i < argc; i++) {
-        char is_int = 1;
         int convi = atoi(argv[i]);
-        
-        // check if the entire string contains non-int chars
-        for (int j=0; argv[i][j] != '\x00'; j++) {
-            char chr = argv[i][j];
-            if (!(chr >= 48 && chr <= 57))
-            {
-                is_int = 0;
-                break;
-            }
-        }
+        if (convi != 0) {  // argument got parsed to int
+            argv[i] = convi;
+        } else {  // test if it's actually 0 (but 0x0 is failed edge case)
+            char is_int = 1;
 
-        // 0x0 is edge case
-        if (convi != 0 || is_int == 1) {
-            argv[i] = atoi(argv[i]);
+            // check if the entire string contains non-int chars
+            for (int j=0; argv[i][j] != '\x00'; j++) {
+                char chr = argv[i][j];
+                if (!(chr >= 48 && chr <= 57))
+                {
+                    is_int = 0;
+                    break;
+                }
+            }
+
+            if (is_int == 1)
+                argv[i] = convi;
         }
     }
 
